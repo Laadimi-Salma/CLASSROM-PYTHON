@@ -5,8 +5,9 @@ Ce guide vous explique comment déployer l'application Sentiment Analyzer sur **
 ---
 
 ## 📋 Table des matières
+
 1. [Streamlit Cloud (Gratuit & Rapide)](#1-streamlit-cloud)
-2. [Render  git push -u origin main(Gratuit avec limitations)](#2-render)
+2. [Render git push -u origin main(Gratuit avec limitations)](#2-render)
 3. [Docker en Local (Accessible en réseau)](#3-docker-en-local)
 
 ---
@@ -14,6 +15,7 @@ Ce guide vous explique comment déployer l'application Sentiment Analyzer sur **
 ## 1. ☁️ Streamlit Cloud
 
 ### Avantages
+
 - ✅ **100% Gratuit**
 - ✅ Déploiement en 2 minutes
 - ✅ HTTPS automatique
@@ -22,6 +24,7 @@ Ce guide vous explique comment déployer l'application Sentiment Analyzer sur **
 ### Instructions
 
 #### Étape 1: Préparer votre dépôt GitHub
+
 ```bash
 # Initialiser Git (si pas déjà fait)
 git init
@@ -39,6 +42,7 @@ git push -u origin main
 ```
 
 #### Étape 2: Déployer sur Streamlit Cloud
+
 1. Allez sur [share.streamlit.io](https://share.streamlit.io)
 2. Connectez-vous avec GitHub
 3. Cliquez sur **"New app"**
@@ -49,7 +53,9 @@ git push -u origin main
 5. Cliquez sur **"Deploy!"**
 
 #### Étape 3: Accéder à votre application
+
 Votre app sera accessible à une URL comme:
+
 ```
 https://votre-app-sentiment-analyzer.streamlit.app
 ```
@@ -59,6 +65,7 @@ https://votre-app-sentiment-analyzer.streamlit.app
 ## 2. 🎨 Render
 
 ### Avantages
+
 - ✅ Gratuit (avec 750h/mois)
 - ✅ Déploiement automatique depuis GitHub
 - ✅ HTTPS inclus
@@ -66,9 +73,11 @@ https://votre-app-sentiment-analyzer.streamlit.app
 ### Instructions
 
 #### Étape 1: Préparer votre dépôt GitHub
+
 (Même procédure que Streamlit Cloud ci-dessus)
 
 #### Étape 2: Déployer sur Render
+
 1. Allez sur [render.com](https://render.com)
 2. Créez un compte et connectez GitHub
 3. Cliquez sur **"New +"** → **"Web Service"**
@@ -81,7 +90,9 @@ https://votre-app-sentiment-analyzer.streamlit.app
 6. Cliquez sur **"Create Web Service"**
 
 #### Étape 3: Accéder à votre application
+
 URL fournie par Render:
+
 ```
 https://sentiment-analyzer-xxxx.onrender.com
 ```
@@ -93,12 +104,14 @@ https://sentiment-analyzer-xxxx.onrender.com
 ## 3. 🐳 Docker en Local (Accessible en réseau)
 
 ### Avantages
+
 - ✅ Contrôle total
 - ✅ Fonctionne offline
 - ✅ Accessible sur votre réseau local
 - ⚠️ Nécessite Docker installé
 
 ### Prérequis
+
 Installer Docker Desktop: [https://www.docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop)
 
 ### Option A: Docker Compose (Recommandé)
@@ -142,15 +155,19 @@ docker rm sentiment-app
 ### Accéder à l'application
 
 #### Sur votre machine locale:
+
 ```
 http://localhost:8501
 ```
 
 #### Depuis d'autres appareils sur votre réseau:
+
 1. Trouvez votre adresse IP locale:
+
    ```powershell
    ipconfig
    ```
+
    Cherchez "IPv4 Address" (ex: 192.168.1.100)
 
 2. Accédez depuis n'importe quel appareil sur le même réseau:
@@ -163,15 +180,18 @@ http://localhost:8501
 Pour rendre votre application Docker accessible depuis Internet, vous avez plusieurs options:
 
 #### Option 1: Ngrok (Gratuit & Simple)
+
 ```bash
 # Installer ngrok: https://ngrok.com/download
 
 # Exposer le port 8501
 ngrok http 8501
 ```
+
 Vous obtiendrez une URL publique temporaire comme: `https://xxxx-xx-xx-xx-xx.ngrok.io`
 
 #### Option 2: Configuration du routeur (Port Forwarding)
+
 1. Accédez à l'interface de votre routeur (généralement 192.168.1.1)
 2. Configurez le port forwarding:
    - Port externe: 8501
@@ -186,27 +206,30 @@ Vous obtiendrez une URL publique temporaire comme: `https://xxxx-xx-xx-xx-xx.ngr
 
 ## 📊 Comparaison des plateformes
 
-| Critère | Streamlit Cloud | Render | Docker Local |
-|---------|----------------|--------|--------------|
-| **Coût** | Gratuit | Gratuit (limité) | Gratuit |
-| **Facilité** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ |
-| **Vitesse déploiement** | 2 min | 5 min | 5 min |
-| **Accessible Internet** | ✅ Oui | ✅ Oui | ⚠️ Nécessite config |
-| **HTTPS** | ✅ Oui | ✅ Oui | ❌ Non (par défaut) |
-| **Temps démarrage** | Instantané | 30-60s (si inactif) | Instantané |
-| **Resources** | Limitées | 512 MB RAM | Selon votre machine |
+| Critère                 | Streamlit Cloud | Render              | Docker Local        |
+| ----------------------- | --------------- | ------------------- | ------------------- |
+| **Coût**                | Gratuit         | Gratuit (limité)    | Gratuit             |
+| **Facilité**            | ⭐⭐⭐⭐⭐      | ⭐⭐⭐⭐            | ⭐⭐⭐              |
+| **Vitesse déploiement** | 2 min           | 5 min               | 5 min               |
+| **Accessible Internet** | ✅ Oui          | ✅ Oui              | ⚠️ Nécessite config |
+| **HTTPS**               | ✅ Oui          | ✅ Oui              | ❌ Non (par défaut) |
+| **Temps démarrage**     | Instantané      | 30-60s (si inactif) | Instantané          |
+| **Resources**           | Limitées        | 512 MB RAM          | Selon votre machine |
 
 ---
 
 ## 🎯 Recommandation
 
 ### Pour partager rapidement:
+
 **→ Utilisez Streamlit Cloud** (le plus simple et rapide)
 
 ### Pour un projet professionnel:
+
 **→ Utilisez Render** (avec plan payant pour performances)
 
 ### Pour développement/tests:
+
 **→ Utilisez Docker en local**
 
 ---
@@ -216,14 +239,17 @@ Vous obtiendrez une URL publique temporaire comme: `https://xxxx-xx-xx-xx-xx.ngr
 ### Mettre à jour l'application
 
 #### Streamlit Cloud / Render:
+
 ```bash
 git add .
 git commit -m "Update app"
 git push
 ```
+
 Le déploiement se fait automatiquement!
 
 #### Docker:
+
 ```bash
 # Reconstruire l'image
 docker-compose down
@@ -235,14 +261,17 @@ docker-compose up -d --build
 ## 🆘 Dépannage
 
 ### Streamlit Cloud
+
 - **Erreur de déploiement**: Vérifiez que `requirements.txt` est bien présent
 - **App crash**: Consultez les logs dans le dashboard Streamlit Cloud
 
 ### Render
+
 - **App lente**: Normal sur le plan gratuit, upgrade pour de meilleures performances
 - **Build failed**: Vérifiez les commandes de build et start
 
 ### Docker
+
 - **Port déjà utilisé**: Changez le port dans `docker-compose.yml` (ex: "8502:8501")
 - **Conteneur ne démarre pas**: Vérifiez les logs avec `docker logs sentiment-app`
 

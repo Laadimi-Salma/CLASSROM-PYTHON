@@ -15,6 +15,7 @@ Une application web interactive pour analyser le sentiment des textes en utilisa
 ## 🚀 Démo
 
 L'application analyse n'importe quel texte et détermine:
+
 - Si le sentiment est positif, négatif ou neutre
 - Le degré de subjectivité (opinion vs fait)
 - Des visualisations graphiques des scores
@@ -22,6 +23,7 @@ L'application analyse n'importe quel texte et détermine:
 ## 💻 Installation Locale
 
 ### Prérequis
+
 - Python 3.10 ou supérieur
 
 ### Installation
@@ -76,6 +78,7 @@ Cette application peut être déployée sur plusieurs plateformes. Consultez [RE
 ## 🤝 Contribution
 
 Les contributions sont les bienvenues! N'hésitez pas à:
+
 1. Fork le projet
 2. Créer une branche (`git checkout -b feature/AmazingFeature`)
 3. Commit vos changements (`git commit -m 'Add some AmazingFeature'`)
