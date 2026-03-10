@@ -6,7 +6,7 @@ Ce guide vous explique comment déployer l'application Sentiment Analyzer sur **
 
 ## 📋 Table des matières
 1. [Streamlit Cloud (Gratuit & Rapide)](#1-streamlit-cloud)
-2. [Render (Gratuit avec limitations)](#2-render)
+2. [Render  git push -u origin main(Gratuit avec limitations)](#2-render)
 3. [Docker en Local (Accessible en réseau)](#3-docker-en-local)
 
 ---
