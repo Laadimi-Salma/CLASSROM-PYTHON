@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simulation Credit - Banque Marocaine</title>
+  <style>
+    :root {
+      --bg-1: #f7f4ee;
+      --bg-2: #efe6d4;
+      --ink: #1a1f2b;
+      --primary: #085f63;
+      --accent: #f2a104;
+      --ok: #0a8f4f;
+      --ko: #a62020;
+      --card: #ffffff;
+      --line: #d9d3c7;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Trebuchet MS", sans-serif;
+      color: var(--ink);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 10% 10%, #ffffff 0%, transparent 30%),
+        radial-gradient(circle at 90% 20%, #fde5b4 0%, transparent 35%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .panel {
+      width: min(920px, 100%);
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    .header {
+      padding: 20px;
+      background: linear-gradient(90deg, var(--primary), #0e8a8f);
+      color: #fff;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+      letter-spacing: 0.02em;
+    }
+
+    .header p {
+      margin: 6px 0 0;
+      opacity: 0.92;
+    }
+
+    form {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .full { grid-column: 1 / -1; }
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+      color: #2b3140;
+    }
+
+    input, select, button {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #cfd6dc;
+      padding: 10px 12px;
+      font-size: 0.98rem;
+    }
+
+    input:focus, select:focus {
+      outline: 2px solid #9fd7da;
+      border-color: var(--primary);
+    }
+
+    button {
+      border: 0;
+      background: linear-gradient(90deg, var(--accent), #ef7d14);
+      color: #141414;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 120ms ease, filter 120ms ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.04);
+    }
+
+    .result {
+      margin: 0 20px 20px;
+      border: 1px dashed var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      background: #fcfbf8;
+      display: none;
+      animation: fadeIn 260ms ease;
+    }
+
+    .decision {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .ok { color: var(--ok); }
+    .ko { color: var(--ko); }
+
+    .hint {
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 760px) {
+      form { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <section class="panel">
+    <div class="header">
+      <h1>Interface Credit - Pre-traitement</h1>
+      <p>Remplissez les informations du demandeur puis lancez l'evaluation du risque.</p>
+    </div>
+
+    <form id="credit-form">
+      <div>
+        <label for="age">Age</label>
+        <input id="age" name="age" type="number" min="18" max="100" required />
+      </div>
+
+      <div>
+        <label for="revenu_mensuel">Revenu mensuel (MAD)</label>
+        <input id="revenu_mensuel" name="revenu_mensuel" type="number" min="1000" required />
+      </div>
+
+      <div>
+        <label for="montant_credit_demande">Montant credit demande (MAD)</label>
+        <input id="montant_credit_demande" name="montant_credit_demande" type="number" min="1000" required />
+      </div>
+
+      <div>
+        <label for="duree_remboursement_mois">Duree remboursement (mois)</label>
+        <input id="duree_remboursement_mois" name="duree_remboursement_mois" type="number" min="12" max="60" required />
+      </div>
+
+      <div>
+        <label for="nb_credits_anterieurs">Nombre de credits anterieurs</label>
+        <input id="nb_credits_anterieurs" name="nb_credits_anterieurs" type="number" min="0" max="20" required />
+      </div>
+
+      <div>
+        <label for="situation_familiale">Situation familiale</label>
+        <select id="situation_familiale" name="situation_familiale" required>
+          <option value="celibataire">celibataire</option>
+          <option value="marie">marie</option>
+          <option value="divorce">divorce</option>
+        </select>
+      </div>
+
+      <div class="full">
+        <label for="type_emploi">Type emploi</label>
+        <select id="type_emploi" name="type_emploi" required>
+          <option value="salarie_prive">salarie_prive</option>
+          <option value="fonctionnaire">fonctionnaire</option>
+          <option value="independant">independant</option>
+          <option value="sans_emploi">sans_emploi</option>
+        </select>
+      </div>
+
+      <div class="full">
+        <button type="submit">Evaluer la demande</button>
+      </div>
+    </form>
+
+    <div class="result" id="result-box">
+      <div class="decision" id="decision"></div>
+      <div id="confidence"></div>
+      <p class="hint">Cette simulation est un prototype de pre-traitement automatique.</p>
+    </div>
+  </section>
+
+  <script>
+    const form = document.getElementById("credit-form");
+    const resultBox = document.getElementById("result-box");
+    const decisionText = document.getElementById("decision");
+    const confidenceText = document.getElementById("confidence");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const payload = {
+        age: Number(form.age.value),
+        revenu_mensuel: Number(form.revenu_mensuel.value),
+        montant_credit_demande: Number(form.montant_credit_demande.value),
+        duree_remboursement_mois: Number(form.duree_remboursement_mois.value),
+        nb_credits_anterieurs: Number(form.nb_credits_anterieurs.value),
+        situation_familiale: form.situation_familiale.value,
+        type_emploi: form.type_emploi.value,
+      };
+
+      try {
+        const response = await fetch("/predire", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.erreur || "Erreur API");
+        }
+
+        decisionText.textContent = `Decision: ${data.decision}`;
+        decisionText.className = data.decision === "ACCORDE" ? "decision ok" : "decision ko";
+        confidenceText.textContent = `Confiance: ${data.confiance}`;
+        resultBox.style.display = "block";
+      } catch (error) {
+        decisionText.textContent = "Erreur lors de la prediction";
+        decisionText.className = "decision ko";
+        confidenceText.textContent = String(error.message || error);
+        resultBox.style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>
